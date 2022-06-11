@@ -57,7 +57,7 @@ jobs:
         sed -i 's/CONFIG_FIRMWARE_INCLUDE_NFSD=n/CONFIG_FIRMWARE_INCLUDE_NFSD=y/g' .config
         sed -i 's/CONFIG_FIRMWARE_INCLUDE_NFSC=n/CONFIG_FIRMWARE_INCLUDE_NFSC=y/g' .config
         sed -i 's/CONFIG_FIRMWARE_INCLUDE_OPENSSL_EXE=n/CONFIG_FIRMWARE_INCLUDE_OPENSSL_EXE=y/g' .config
-        #sed -i 's/CONFIG_FIRMWARE_INCLUDE_WIREGUARD=y/CONFIG_FIRMWARE_INCLUDE_WIREGUARD=n/g' .config #此项待定，观察后再决定
+        sed -i 's/CONFIG_FIRMWARE_INCLUDE_WIREGUARD=y/CONFIG_FIRMWARE_INCLUDE_WIREGUARD=n/g' .config #此项待定，观察后再决定
         sed -i 's/CONFIG_FIRMWARE_INCLUDE_DNSFORWARDER=y/CONFIG_FIRMWARE_INCLUDE_DNSFORWARDER=n/g' .config
         sed -i 's/CONFIG_FIRMWARE_INCLUDE_MENTOHUST=y/CONFIG_FIRMWARE_INCLUDE_MENTOHUST=n/g' .config
         sed -i 's/CONFIG_FIRMWARE_INCLUDE_SCUTCLIENT=y/CONFIG_FIRMWARE_INCLUDE_SCUTCLIENT=n/g' .config
@@ -85,15 +85,24 @@ jobs:
         #其他
         echo "CONFIG_FIRMWARE_INCLUDE_SQM=y" >> .config #SQM QOS
         echo "CONFIG_FIRMWARE_INCLUDE_SMARTDNS=y" >> .config #smartdns
+        echo "CONFIG_FIRMWARE_INCLUDE_NFSD=y" >> .config #iperf3
+        echo "CONFIG_FIRMWARE_INCLUDE_NFSC=y" >> .config #socat
         #echo "CONFIG_FIRMWARE_INCLUDE_TTYD=y" >> .config #ttyd
-        #echo "CONFIG_FIRMWARE_INCLUDE_NFSD=y" >> .config #iperf3
-        #echo "CONFIG_FIRMWARE_INCLUDE_NFSC=y" >> .config #socat
                 
         #########################################################################################
         #自定义添加其它功能请参考源码configs/templates/目录下的config文件。按照上面的格式添加即可
         #格式如下：
         #sed -i '/自定义项/d' .config
         #echo "自定义项=y" >> .config
+        sed -i '/CONFIG_FIRMWARE_INCLUDE_DNS2TCP/d' .config
+        echo "CONFIG_FIRMWARE_INCLUDE_DNS2TCP=y" >> .config
+        sed -i '/CONFIG_FIRMWARE_INCLUDE_DNSMASQ/d' .config
+        echo "CONFIG_FIRMWARE_INCLUDE_DNSMASQ=y" >> .config        
+        sed -i '/CONFIG_FIRMWARE_INCLUDE_3PROXY/d' .config
+        echo "CONFIG_FIRMWARE_INCLUDE_3PROXY=y" >> .config 
+        sed -i '/CONFIG_FIRMWARE_INCLUDE_ALIYUNDRIVE-WEBDAV/d' .config
+        echo "CONFIG_FIRMWARE_INCLUDE_ALIYUNDRIVE-WEBDAV=y" >> .config
+
         #########################################################################################
         sudo ./clear_tree
         sudo ./build_firmware_modify $TNAME 0
