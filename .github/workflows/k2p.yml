@@ -70,7 +70,7 @@ jobs:
         echo "CONFIG_FIRMWARE_INCLUDE_SHADOWSOCKS=y" >> .config #科学上网插件，选择n后全部有关插件都不集成
         #echo "CONFIG_FIRMWARE_INCLUDE_XRAY=y" >> .config #集成xray执行文件 ~4.5M
         #echo "CONFIG_FIRMWARE_INCLUDE_V2RAY=y" >> .config #集成v2ray执行文件
-        #echo "CONFIG_FIRMWARE_INCLUDE_TROJAN=y" >> .config #集成trojan执行文件 ~0.5M
+        echo "CONFIG_FIRMWARE_INCLUDE_TROJAN=y" >> .config #集成trojan执行文件 ~0.5M
         echo "CONFIG_FIRMWARE_INCLUDE_SSOBFS=y" >> .config #simple-obfs混淆插件
         
         ##广告管理##
@@ -80,7 +80,7 @@ jobs:
         ##内网穿透服务##
         echo "CONFIG_FIRMWARE_INCLUDE_ALIDDNS=y" >> .config #aliddns
         echo "CONFIG_FIRMWARE_INCLUDE_ZEROTIER=y" >> .config #zerotier ~1.3M
-        #echo "CONFIG_FIRMWARE_INCLUDE_WIREGUARD=y" >> .config #wirguard
+        echo "CONFIG_FIRMWARE_INCLUDE_WIREGUARD=y" >> .config #wirguard
 
         #其他
         echo "CONFIG_FIRMWARE_INCLUDE_SQM=y" >> .config #SQM QOS
@@ -100,8 +100,8 @@ jobs:
         echo "CONFIG_FIRMWARE_INCLUDE_DNSMASQ=y" >> .config        
         sed -i '/CONFIG_FIRMWARE_INCLUDE_3PROXY/d' .config
         echo "CONFIG_FIRMWARE_INCLUDE_3PROXY=y" >> .config 
-        sed -i '/CONFIG_FIRMWARE_INCLUDE_ALIYUNDRIVE-WEBDAV/d' .config
-        echo "CONFIG_FIRMWARE_INCLUDE_ALIYUNDRIVE-WEBDAV=y" >> .config
+        sed -i '/CONFIG_FIRMWARE_INCLUDE_ALDRIVER/d' .config
+        echo "CONFIG_FIRMWARE_INCLUDE_ALDRIVER=y" >> .config
 
         #########################################################################################
         sudo ./clear_tree
