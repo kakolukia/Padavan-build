@@ -109,8 +109,8 @@ jobs:
         echo "CONFIG_FIRMWARE_INCLUDE_SQM=y" >> .config #SQM QOS
         echo "CONFIG_FIRMWARE_INCLUDE_SMARTDNS=y" >> .config #smartdns
         echo "CONFIG_FIRMWARE_INCLUDE_SMARTDNSBIN=y" >> .config #smartdns二进制文件
-        echo "CONFIG_FIRMWARE_INCLUDE_ALDRIVER=n" >> .config #阿里云盘 ~3m
-        echo "CONFIG_FIRMWARE_INCLUDE_3PROXY=n" >> .config 
+        echo "CONFIG_FIRMWARE_INCLUDE_ALDRIVER=y" >> .config #阿里云盘 ~3m
+        echo "CONFIG_FIRMWARE_INCLUDE_3PROXY=y" >> .config 
         echo "CONFIG_FIRMWARE_INCLUDE_TTYD=n" >> .config #ttyd
         echo "CONFIG_FIRMWARE_INCLUDE_MENTOHUST=n" >> .config #mentohust
         echo "CONFIG_FIRMWARE_INCLUDE_NFSD=n" >> .config #iperf3
