@@ -94,14 +94,16 @@ jobs:
         #格式如下：
         #sed -i '/自定义项/d' .config
         #echo "自定义项=y" >> .config
-        sed -i '/CONFIG_FIRMWARE_INCLUDE_DNS2TCP/d' .config
-        echo "CONFIG_FIRMWARE_INCLUDE_DNS2TCP=y" >> .config
-        sed -i '/CONFIG_FIRMWARE_INCLUDE_DNSMASQ/d' .config
-        echo "CONFIG_FIRMWARE_INCLUDE_DNSMASQ=y" >> .config        
+        #sed -i '/CONFIG_FIRMWARE_INCLUDE_DNS2TCP/d' .config
+        #echo "CONFIG_FIRMWARE_INCLUDE_DNS2TCP=y" >> .config
+        #sed -i '/CONFIG_FIRMWARE_INCLUDE_DNSMASQ/d' .config
+        #echo "CONFIG_FIRMWARE_INCLUDE_DNSMASQ=y" >> .config        
         sed -i '/CONFIG_FIRMWARE_INCLUDE_3PROXY/d' .config
         echo "CONFIG_FIRMWARE_INCLUDE_3PROXY=y" >> .config 
-        sed -i '/CONFIG_FIRMWARE_INCLUDE_ALDRIVER/d' .config
-        echo "CONFIG_FIRMWARE_INCLUDE_ALDRIVER=y" >> .config
+        #sed -i '/CONFIG_FIRMWARE_INCLUDE_ALDRIVER/d' .config
+        #echo "CONFIG_FIRMWARE_INCLUDE_ALDRIVER=y" >> .config
+        sed -i '/CONFIG_FIRMWARE_INCLUDE_MINIUPNPD/d' .config
+        echo "CONFIG_FIRMWARE_INCLUDE_MINIUPNPD=y" >> .config        
 
         #########################################################################################
         sudo ./clear_tree
