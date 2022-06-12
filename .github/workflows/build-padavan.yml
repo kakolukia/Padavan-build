@@ -1,5 +1,5 @@
 #修改TNAME: K2P 中的K2P为你需要编译的型号，注意名称要与configs/templates/目录下的名字相同
-name: Build Padavan k2p
+name: Build Padavan
 
 on: 
   release:
@@ -54,10 +54,10 @@ jobs:
         #因不同型号配置功能不一样，所以先把配置项删除，如果你自己要添加其他的，也要写上删除这一条，切记！！！
         ################################################################################################
         sed -i 's/CONFIG_FIRMWARE_INCLUDE_SRELAY=y/CONFIG_FIRMWARE_INCLUDE_SRELAY=n/g' .config
-        sed -i 's/CONFIG_FIRMWARE_INCLUDE_NFSD=n/CONFIG_FIRMWARE_INCLUDE_NFSD=y/g' .config
-        sed -i 's/CONFIG_FIRMWARE_INCLUDE_NFSC=n/CONFIG_FIRMWARE_INCLUDE_NFSC=y/g' .config
+        #sed -i 's/CONFIG_FIRMWARE_INCLUDE_NFSD=n/CONFIG_FIRMWARE_INCLUDE_NFSD=y/g' .config
+        #sed -i 's/CONFIG_FIRMWARE_INCLUDE_NFSC=n/CONFIG_FIRMWARE_INCLUDE_NFSC=y/g' .config
         sed -i 's/CONFIG_FIRMWARE_INCLUDE_OPENSSL_EXE=n/CONFIG_FIRMWARE_INCLUDE_OPENSSL_EXE=y/g' .config
-        sed -i 's/CONFIG_FIRMWARE_INCLUDE_WIREGUARD=y/CONFIG_FIRMWARE_INCLUDE_WIREGUARD=n/g' .config #此项待定，观察后再决定
+        sed -i 's/CONFIG_FIRMWARE_INCLUDE_WIREGUARD=y/CONFIG_FIRMWARE_INCLUDE_WIREGUARD=n/g' .config
         sed -i 's/CONFIG_FIRMWARE_INCLUDE_DNSFORWARDER=y/CONFIG_FIRMWARE_INCLUDE_DNSFORWARDER=n/g' .config
         sed -i 's/CONFIG_FIRMWARE_INCLUDE_MENTOHUST=y/CONFIG_FIRMWARE_INCLUDE_MENTOHUST=n/g' .config
         sed -i 's/CONFIG_FIRMWARE_INCLUDE_SCUTCLIENT=y/CONFIG_FIRMWARE_INCLUDE_SCUTCLIENT=n/g' .config
@@ -66,6 +66,10 @@ jobs:
         ######################################################################
         #以下选项是定义你需要的功能（y=集成,n=忽略），重新写入到.config文件
         ######################################################################
+        ##系统基础
+        #echo "CONFIG_FIRMWARE_INCLUDE_IPTABLES=y" >> .config
+        #echo "CONFIG_FIRMWARE_INCLUDE_MINIUPNPD=y" >> .config
+        
         ##科学上网##
         echo "CONFIG_FIRMWARE_INCLUDE_SHADOWSOCKS=y" >> .config #科学上网插件，选择n后全部有关插件都不集成
         #echo "CONFIG_FIRMWARE_INCLUDE_XRAY=y" >> .config #集成xray执行文件 ~4.5M
@@ -85,10 +89,9 @@ jobs:
         #其他
         echo "CONFIG_FIRMWARE_INCLUDE_SQM=y" >> .config #SQM QOS
         echo "CONFIG_FIRMWARE_INCLUDE_SMARTDNS=y" >> .config #smartdns
-        echo "CONFIG_FIRMWARE_INCLUDE_NFSD=y" >> .config #iperf3
-        echo "CONFIG_FIRMWARE_INCLUDE_NFSC=y" >> .config #socat
+        #echo "CONFIG_FIRMWARE_INCLUDE_NFSD=y" >> .config #iperf3
+        #echo "CONFIG_FIRMWARE_INCLUDE_NFSC=y" >> .config #socat
         #echo "CONFIG_FIRMWARE_INCLUDE_TTYD=y" >> .config #ttyd
-                
         #########################################################################################
         #自定义添加其它功能请参考源码configs/templates/目录下的config文件。按照上面的格式添加即可
         #格式如下：
@@ -98,13 +101,10 @@ jobs:
         #echo "CONFIG_FIRMWARE_INCLUDE_DNS2TCP=y" >> .config
         #sed -i '/CONFIG_FIRMWARE_INCLUDE_DNSMASQ/d' .config
         #echo "CONFIG_FIRMWARE_INCLUDE_DNSMASQ=y" >> .config        
-        sed -i '/CONFIG_FIRMWARE_INCLUDE_3PROXY/d' .config
-        echo "CONFIG_FIRMWARE_INCLUDE_3PROXY=y" >> .config 
+        #sed -i '/CONFIG_FIRMWARE_INCLUDE_3PROXY/d' .config
+        #echo "CONFIG_FIRMWARE_INCLUDE_3PROXY=y" >> .config 
         #sed -i '/CONFIG_FIRMWARE_INCLUDE_ALDRIVER/d' .config
         #echo "CONFIG_FIRMWARE_INCLUDE_ALDRIVER=y" >> .config
-        sed -i '/CONFIG_FIRMWARE_INCLUDE_MINIUPNPD/d' .config
-        echo "CONFIG_FIRMWARE_INCLUDE_MINIUPNPD=y" >> .config        
-
         #########################################################################################
         sudo ./clear_tree
         sudo ./build_firmware_modify $TNAME 0
