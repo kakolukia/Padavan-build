@@ -99,6 +99,7 @@ jobs:
         echo "CONFIG_FIRMWARE_INCLUDE_DDNSTO=n" >> .config #ddnsto  ~0.5M
         echo "CONFIG_FIRMWARE_INCLUDE_FRPC=n" >> .config #内网穿透FRPC
         echo "CONFIG_FIRMWARE_INCLUDE_FRPS=n" >> .config #内网穿透FRPS
+        echo "CONFIG_FIRMWARE_INCLUDE_SOCAT=y" >> .config #socat
 
         #其他
         echo "CONFIG_FIRMWARE_INCLUDE_SQM=y" >> .config #SQM QOS
@@ -108,8 +109,8 @@ jobs:
         echo "CONFIG_FIRMWARE_INCLUDE_3PROXY=y" >> .config  #3proxy代理
         echo "CONFIG_FIRMWARE_INCLUDE_TTYD=y" >> .config #ttyd
         echo "CONFIG_FIRMWARE_INCLUDE_MENTOHUST=n" >> .config #mentohust
-        echo "CONFIG_FIRMWARE_INCLUDE_NFSD=n" >> .config #iperf3
-        echo "CONFIG_FIRMWARE_INCLUDE_NFSC=n" >> .config #socat
+        echo "CONFIG_FIRMWARE_INCLUDE_NFSD=n" >> .config #NFSv3 server
+        echo "CONFIG_FIRMWARE_INCLUDE_NFSC=n" >> .config #NFSv3 client
         #########################################################################################
         #自定义添加其它功能请参考源码configs/templates/目录下的config文件。按照上面的格式添加即可
         #格式如下：
