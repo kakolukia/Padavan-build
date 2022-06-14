@@ -32,8 +32,8 @@ jobs:
         pkg-config zlib1g-dev libgmp3-dev libmpc-dev libmpfr-dev libncurses5-dev libltdl-dev wget
     - name: Clone source code
       run: |
+        # 若启用CPU超频，请将下行的 MeIsReallyBa 仓库改为 padavanonly 仓库，地址：https://github.com/padavanonly/padavan-4.4.git
         git clone --depth=1 https://github.com/MeIsReallyBa/padavan-4.4.git /opt/rt-n56u
-        #git clone --depth=1 https://github.com/padavanonly/padavan-4.4.git /opt/rt-n56u #调整CPU时更换为padavanonly源码
         cd /opt/rt-n56u/toolchain-mipsel
         sh dl_toolchain.sh
         mkdir -p /opt/images/
@@ -77,31 +77,36 @@ jobs:
         sed -i '/CONFIG_FIRMWARE_INCLUDE_MENTOHUST/d' .config
         sed -i '/CONFIG_FIRMWARE_INCLUDE_NFSD/d' .config
         sed -i '/CONFIG_FIRMWARE_INCLUDE_NFSC/d' .config
+        sed -i '/CONFIG_FIRMWARE_INCLUDE_SRELAY/d' .config
         ##########################################################################################################
         #以下选项是定义你需要的功能（y=集成,n=忽略），重新写入到.config文件，请根据自己路由的FLASH大小选择,切勿超大小！
         #此插件选项只在本地编译的时候才会生效
         ##########################################################################################################
-        #CPU超频
+        ## CPU超频 ##
         echo "CONFIG_FIRMWARE_INCLUDE_OC=n" >> .config #CPU超频开关
         echo 'CONFIG_FIRMWARE_MT7621_OC="0x312"' >> .config #此处填写对应频率的十六进制：1000Mhz=0x312 1100Mhz=0x362 1120Mhz=0x372 1200Mhz=0x3B2
 
-        ##科学上网##
+        ## 科学上网 ##
         echo "CONFIG_FIRMWARE_INCLUDE_SHADOWSOCKS=y" >> .config #科学上网插件，选择n后全部有关插件都不集成
         echo "CONFIG_FIRMWARE_INCLUDE_XRAY=n" >> .config #集成xray执行文件  ~4.5M
         echo "CONFIG_FIRMWARE_INCLUDE_V2RAY=n" >> .config #集成v2ray执行文件
         echo "CONFIG_FIRMWARE_INCLUDE_TROJAN=n" >> .config #集成trojan执行文件  ~1.2M
         
-        ##广告管理##
+        ## 广告管理 ##
         echo "CONFIG_FIRMWARE_INCLUDE_ADBYBY=y" >> .config #adbyby plus+
         echo "CONFIG_FIRMWARE_INCLUDE_ADGUARDHOME=n" >> .config #adg DNS去AD
 
-        ##内网穿透服务##
+        ## 内网穿透服务 ##
         echo "CONFIG_FIRMWARE_INCLUDE_ALIDDNS=y" >> .config #aliddns
         echo "CONFIG_FIRMWARE_INCLUDE_ZEROTIER=y" >> .config #zerotier ~1.3M
         echo "CONFIG_FIRMWARE_INCLUDE_WIREGUARD=y" >> .config #wireguard 10k
         echo "CONFIG_FIRMWARE_INCLUDE_DDNSTO=n" >> .config #ddnsto  ~0.5M
         echo "CONFIG_FIRMWARE_INCLUDE_FRPC=y" >> .config #内网穿透FRPC
         echo "CONFIG_FIRMWARE_INCLUDE_FRPS=y" >> .config #内网穿透FRPS
+                
+        ## 代理 ##
+        echo "CONFIG_FIRMWARE_INCLUDE_SRELAY=n" >> .config #SOCKS代理
+        echo "CONFIG_FIRMWARE_INCLUDE_3PROXY=n" >> .config #3proxy代理
         echo "CONFIG_FIRMWARE_INCLUDE_SOCAT=n" >> .config #socat
 
         #其他
@@ -109,11 +114,10 @@ jobs:
         echo "CONFIG_FIRMWARE_INCLUDE_SMARTDNS=n" >> .config #SmartDNS
         echo "CONFIG_FIRMWARE_INCLUDE_SMARTDNSBIN=n" >> .config #smartdns二进制文件
         echo "CONFIG_FIRMWARE_INCLUDE_ALDRIVER=n" >> .config #阿里云盘 ~3m
-        echo "CONFIG_FIRMWARE_INCLUDE_3PROXY=n" >> .config  #3proxy代理
         echo "CONFIG_FIRMWARE_INCLUDE_TTYD=n" >> .config #ttyd
-        echo "CONFIG_FIRMWARE_INCLUDE_MENTOHUST=n" >> .config #mentohust
         echo "CONFIG_FIRMWARE_INCLUDE_NFSD=n" >> .config #NFSv3 server
         echo "CONFIG_FIRMWARE_INCLUDE_NFSC=n" >> .config #NFSv3 client
+        echo "CONFIG_FIRMWARE_INCLUDE_MENTOHUST=n" >> .config #MentoHUST锐捷认证
         #########################################################################################
         #自定义添加其它功能请参考源码configs/templates/目录下的config文件。按照上面的格式添加即可
         #格式如下：
